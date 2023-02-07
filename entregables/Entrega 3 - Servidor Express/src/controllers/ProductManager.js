@@ -159,9 +159,8 @@ export default ProductManager;
 
 
 /* 
-
 //Crea nueva instancia de ProductManager
-const administrador = new ProductManager("./products.txt");
+const administrador = new ProductManager("src/models/products.txt");
 
 
 const crear = async (title, description, price, thumnail, code, stock) => {
