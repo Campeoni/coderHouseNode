@@ -2,8 +2,7 @@ body {
   background-color: gainsboro;
 }
 
-.productContainter,
-#ProductsServerList {
+.productContainter {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
