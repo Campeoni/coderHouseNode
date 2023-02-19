@@ -1,0 +1,134 @@
+body {
+  background-color: gainsboro;
+}
+
+.productContainter,
+#ProductsServerList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.productTitle,
+.productCard,
+.productTitleAdd {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+}
+
+.productTitle {
+  background-color: thistle;
+}
+
+.productTitleAdd {
+  background-color: rgb(120, 211, 218);
+}
+
+.productCard {
+  background-color: papayawhip;
+}
+
+.titleCards {
+  font-weight: bolder;
+}
+
+.id,
+.title,
+.description,
+.price,
+.thumbnail,
+.code,
+.stock,
+.category,
+.status,
+.descriptionList,
+.deleteButton {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.id {
+  flex-basis: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  flex-basis: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.description {
+  flex-basis: 50%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.descriptionList {
+  flex-basis: 45%;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.price {
+  flex-basis: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbnail {
+  flex-basis: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code {
+  flex-basis: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stock {
+  flex-basis: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category {
+  flex-basis: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status {
+  flex-basis: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteButton {
+  flex-basis: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  width: 105px;
+  height: 150px;
+}

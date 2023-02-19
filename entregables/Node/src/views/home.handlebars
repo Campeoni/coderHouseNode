@@ -1,0 +1,33 @@
+<h1>Lista de productos</h1>
+
+<div class="productContainter">
+
+  <div class="productTitle">
+      <div class="id titleCards">ID</div>
+      <div class="title titleCards">Titulo</div>
+      <div class="description titleCards" style="justify-content: center;">Descripcion</div>
+      <div class="price titleCards">Precio</div>
+      <div class="thumbnail titleCards"> Imagen </div>
+      <div class="code titleCards"> Codigo</div>
+      <div class="stock titleCards">Stock</div>
+      <div class="category titleCards">Categoria</div>
+      <div class="status titleCards">Estado</div>
+
+  </div>
+  
+  {{#each productos}}
+    <div class="productCard">
+      <div class="id">{{this.id}}</div>
+      <div class="title">{{this.title}}</div>
+      <div class="description">{{this.description}}</div>
+      <div class="price">$ {{this.price}}</div>
+      <div class="thumbnail">
+        <img src={{this.thumbnail}}></img>                
+      </div>
+      <div class="code">{{this.code}}</div>
+      <div class="stock">{{this.stock}}</div>
+      <div class="category">{{this.category}}</div>
+      <div class="status">{{this.status}}</div>
+    </div>
+  {{/each}}
+</div>
