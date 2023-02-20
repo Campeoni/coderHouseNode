@@ -30,8 +30,40 @@ socket.on("getProducts", products => {
 })
 
 
-deleteProduct = (id) => {    
+addProduct = () => {
+
+    const title         = document.getElementById("title")
+    const description   = document.getElementById("description")
+    const price         = document.getElementById("price")
+    const thumbnail     = document.getElementById("thumbnail")
+    const code          = document.getElementById("code")
+    const stock         = document.getElementById("stock")
+    const category      = document.getElementById("category")
+    const status        = document.getElementById("status")
     
-    socket.emit("deleteProduct", id)
+    let product = {
+        "title":        title.value,
+        "description":  description.value,
+        "price":        price.value,
+        "thumbnail":    thumbnail.value,
+        "code":         code.value,
+        "stock":        stock.value,
+        "category":     category.value,
+        "status":       status.value
+    }
+
+    socket.emit("addProduct", product);
 }
+
+socket.on("resultAddProduct", mensaje => {
+    console.log("Resultado agregado del producto: ", mensaje);
+})
+
+deleteProduct = (id) => {        
+    socket.emit("deleteProduct", id);
+}
+
+socket.on("resultDelectProduct", mensaje => {
+    console.log("Resultado eliminacion del producto: ", mensaje);
+})
 

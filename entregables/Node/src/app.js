@@ -53,10 +53,15 @@ io.on("connection", async (socket)=> {
 
   socket.emit("getProducts", await P_M.getProducts());
   
-  socket.on("deleteProduct", async id => {
-    socket.emit("msgDeleteProduct", await P_M.deleteProduct(parseInt(id)))
+  socket.on("addProduct", async product => {
+    socket.emit("resultAddProduct", await P_M.addProduct(product))
     socket.emit("getProducts", await P_M.getProducts())
-})
+  })
+
+  socket.on("deleteProduct", async id => {
+    socket.emit("resultDelectProduct", await P_M.deleteProduct(parseInt(id)))
+    socket.emit("getProducts", await P_M.getProducts())
+  })
   
 /*   //Recibe info desde el Front End con clave "mensaje_saludo"
   socket.on("mensaje_saludo", info =>{    
