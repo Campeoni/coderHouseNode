@@ -29,9 +29,7 @@ socket.on("getProducts", products => {
     })
 })
 
-
 addProduct = () => {
-
     const title         = document.getElementById("title")
     const description   = document.getElementById("description")
     const price         = document.getElementById("price")
@@ -40,18 +38,17 @@ addProduct = () => {
     const stock         = document.getElementById("stock")
     const category      = document.getElementById("category")
     const status        = document.getElementById("status")
-    
-    let product = {
-        "title":        title.value,
-        "description":  description.value,
-        "price":        price.value,
-        "thumbnail":    thumbnail.value,
-        "code":         code.value,
-        "stock":        stock.value,
-        "category":     category.value,
-        "status":       status.value
-    }
 
+    let product = {
+        "title":        title.value || undefined ,
+        "description":  description.value || undefined,
+        "price":        price.value || undefined,
+        "thumbnail":    thumbnail.value || undefined,
+        "code":         code.value || undefined,
+        "stock":        stock.value || undefined,
+        "category":     category.value || undefined,
+        "status":       status.value || undefined
+    }
     socket.emit("addProduct", product);
 }
 

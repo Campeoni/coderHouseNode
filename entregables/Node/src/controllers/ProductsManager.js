@@ -32,6 +32,25 @@ class ProductsManager{
       return answer        
     }      
   } 
+
+ /*  getProductsFront = async() => {
+    let products = await this.getProducts();
+
+    console.log("viendo ando= ", products);
+    
+    products =  await products.map( product =>{
+      
+      const imagen =  async() => {
+
+      await fs.access(`../public/img/${product.thumbnail}`, err => {
+        if (err) console.log('El archivo no existe')
+      })}   
+
+      console.log("imagen= ", imagen.then);  
+      return product
+    })
+    return products;
+  } */
     
   //Busca producto por ID
   getProductById = async(id) => {
@@ -132,7 +151,7 @@ class ProductsManager{
         product.title       === undefined || (products[index].title       = product.title)
         product.description === undefined || (products[index].description = product.description)
         product.price       === undefined || (products[index].price       = product.price)
-        product.thumnail    === undefined || (products[index].thumnail    = product.thumnail)
+        product.thumbnail    === undefined || (products[index].thumbnail    = product.thumbnail)
         product.code        === undefined || (products[index].code        = product.code)
         product.category    === undefined || (products[index].category     = product.category)      
         product.stock       === undefined || (products[index].stock       = product.stock)
@@ -159,7 +178,7 @@ class ProductsManager{
                     {"key":"status","mandatory":false},
                     {"key":"stock","mandatory":true},
                     {"key":"category","mandatory":true},
-                    {"key":"thumnail","mandatory":false}]
+                    {"key":"thumbnail","mandatory":false}]
     //valido cada campo aceptado. Si es obligatorio y no vino informado doy error
     let result = {"resultCode":false,"voidField":[]}
     fields.forEach( (field=>{
