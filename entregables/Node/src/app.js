@@ -5,12 +5,15 @@ import multer from 'multer'
 import { engine } from 'express-handlebars';
 import {Server} from "socket.io";
 import ProductManager from "./controllers/ProductsManager.js"
+import "dotenv/config"
+import { getManagerMessages } from "./dao/daoManager.js";
 
 //rutas
 import routerProducts from './routes/products.routes.js'
 import routerCarts from './routes/carts.routes.js'
 import routerRealtimeProducts from './routes/productsWebSocket.routes.js'
 import routerProductsList from './routes/productsList.routes.js'
+import routerChat from './routes/chat.routes.js'
 
 const P_M = new ProductManager('src/models/products.txt');
 
@@ -29,10 +32,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 const app = express(); 
-const PORT = 4000;
 
-const server = app.listen(PORT, () => {
-  console.log(`Server on port ${PORT}`)
+app.set ("port", process.env.PORT || 5000)
+
+const server = app.listen(app.get("port"), () => {
+  console.log(`Server on port ${app.get("port")}`)
 })
 
 //Middlewares
@@ -47,10 +51,35 @@ app.set('views', path.resolve(__dirname, './views')); //__dirname + './views'
 //ServerIO
 const io = new Server(server)
 
+const data = await getManagerMessages();    
+const managerMessage = new data();
 //Conexion Server SocketIo
 io.on("connection", async (socket)=> {  
-  console.log("cliente socket conectado!");
+  console.log("cliente socket conectado!");  
+  
+  socket.on("loadMessage", async () => {
+    const textMessage = await managerMessage.getElements()
+    socket.emit("pushMessage", textMessage)
+  })
+  
+  socket.on("addMessage", async (newMessage) => {
+    await managerMessage.addElements([newMessage])  
 
+    const textMessage = await managerMessage.getElements()    
+    socket.emit("pushMessage", textMessage)
+  })
+
+/*   socket.emit("getchat", async(info) => {
+  
+    const data = await getManagerMessages()
+    console.log("data tiene= ", data);
+    const managerMessage = new data.ManagerMessageMongoDB
+  
+    const mensaje = await managerMessage.getElements()
+    console.log("mensaje= ", mensaje);
+  }) */
+
+/*
   socket.emit("getProducts", await P_M.getProducts());
   
   socket.on("addProduct", async product => {
@@ -62,7 +91,11 @@ io.on("connection", async (socket)=> {
     socket.emit("resultDelectProduct", await P_M.deleteProduct(parseInt(id)))
     socket.emit("getProducts", await P_M.getProducts())
   })
-  
+
+  socket.on("loadImage", async image => {
+    console.log("imagen: ", image );
+  })
+  */
 /*   //Recibe info desde el Front End con clave "mensaje_saludo"
   socket.on("mensaje_saludo", info =>{    
     console.log("mensaje_saludo=", info);
@@ -84,6 +117,8 @@ app.use('/', routerProductsList)
 app.use('/api/products', routerProducts)
 app.use('/api/carts', routerCarts)
 app.use('/realtimeproducts', routerRealtimeProducts)
+app.use('/chat', routerChat)
+
 
 app.post('/upload', upload.single('file'), (req,res) =>{
   console.log("req body: ",req.body);

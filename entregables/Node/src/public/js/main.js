@@ -29,6 +29,14 @@ socket.on("getProducts", products => {
     })
 })
 
+socket.on("resultAddProduct", mensaje => {
+    console.log("Resultado agregado del producto: ", mensaje);
+})
+
+socket.on("resultDelectProduct", mensaje => {
+    console.log("Resultado eliminacion del producto: ", mensaje);
+})
+
 addProduct = () => {
     const title         = document.getElementById("title")
     const description   = document.getElementById("description")
@@ -49,18 +57,26 @@ addProduct = () => {
         "category":     category.value || undefined,
         "status":       status.value || undefined
     }
-    socket.emit("addProduct", product);
-}
 
-socket.on("resultAddProduct", mensaje => {
-    console.log("Resultado agregado del producto: ", mensaje);
-})
+    socket.emit("addProduct", product);
+
+
+    function convertirABase64 (archivo, callbackExito) {
+      var lectorArchivo = new FileReader();
+      lectorArchivo.onload = function() {
+          var base64 = lectorArchivo.result.split(",")[1];
+          callbackExito(base64);
+      };
+
+      lectorArchivo.readAsDataURL(archivo);
+    }
+
+    convertirABase64(thumbnail,function(base64AEnviar) {        
+        socket.emit("loadImage", base64AEnviar);        
+      }
+    );
+}
 
 deleteProduct = (id) => {        
     socket.emit("deleteProduct", id);
 }
-
-socket.on("resultDelectProduct", mensaje => {
-    console.log("Resultado eliminacion del producto: ", mensaje);
-})
-

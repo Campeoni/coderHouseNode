@@ -1,4 +1,4 @@
-import ProductManager from "./controllers/ProductManager.js";
+import ProductManager from "./ProductManager.js";
 
 import express from "express";
 
@@ -7,7 +7,7 @@ const PORT = 8080;
 
 app.use(express.urlencoded({ extended: true })); //Permite realizar consultas en la URL (req.query)
 
-const productsFile = new ProductManager("src/models/Products.txt");
+const productsFile = new ProductManager("src/Products.txt");
 
 //para saber si esta activo. Monitoreo
 app.get("/", (req, res) => {

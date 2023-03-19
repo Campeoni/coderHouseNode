@@ -139,3 +139,26 @@ img {
   width: 105px;
   height: 150px;
 }
+
+.backgroud_chat{
+  background-color: rgb(26, 26, 26);
+}
+
+.text-white{
+  color: white;
+}
+
+.chat-container{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.operational-side-chat{
+  gap: 100px;
+}
+
+.view-side-chat-content{
+  width:  800px ;
+  height: 300px;
+}
